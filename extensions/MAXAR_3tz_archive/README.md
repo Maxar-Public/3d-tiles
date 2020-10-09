@@ -20,7 +20,7 @@ This extension depends on 3DTILES_layers.
 
 ## Overview
 
-This extension allows a 3DTILES_layers to use 3tz archives as content, and to use content from inside 3tz archives as content.
+This extension allows a 3DTILES_layers to use 3tz archives as content.
 
 When referencing a 3tz as content directly, the root tileset of the 3tz, as defined by the [3D Tiles Archive Format 1.0 specification](https://github.com/CesiumGS/3d-tiles/issues/422), must be used.
 
