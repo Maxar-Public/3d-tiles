@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "geojsonproperties.schema.json",
+  "title": "GeoJSON Properties",
+  "description": "Schema describing the GeoJSON properties per 3D-tile group",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Human readable name for the properties schema",
+      "minLength": 1
+    },
+    "semantic": {
+      "type": "string",
+      "minLength": 1,
+      "description": "An high-level identifier that define the meaning of the properties. Recommended best practice is to select a value from a controlled vocabulary or formal classification scheme."
+    },
+    "geometry": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["Point", "LineString", "Polygon", "MultiPoint", "MultiLineString", "MultiPolygon"],
+          "description": "Type of GeoJSON geometry inside the group"
+        },
+        "dimensions": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 3,
+          "description": "2D or 3D geometries"
+        }
+      },
+      "required": [
+        "type",
+        "dimensions"
+      ]
+
+    },
+    "properties": {
+      "type": "array",
+      "description": "An array of metadata properties in the specified group",
+      "items": {
+        "type": "object",
+        "minItems": 1,
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Unique property identifier."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["Integer", "Float", "String", "Boolean", "Variant"],
+            "description": "Datatype of the specified property"
+          },
+          "description": {
+            "type": "string",
+            "description": "Human readable description of the property.",
+            "minLength": 1
+          },
+          "unit": {
+            "type": "string",
+            "description": "Unit of the specified property.",
+            "minLength": 1
+          },
+          "max": {
+            "type": "number",
+            "description": "Maximum allowed value for the property. Only applicable to integer and float types."
+          },
+          "min": {
+            "type": "number",
+            "description": "Minimum allowed value for the property. Only applicable to integer and float types."
+          },
+          "required": {
+            "type": "boolean",
+            "description": "If required, the property shall be present in every entity conforming to the feature.",
+            "default": false
+          },
+          "default": {
+            "oneOf": [{
+                "type": "number",
+              }, {
+                "type": "string",
+                "minLength": 1
+              }, {
+                "type": "boolean"
+              }
+            ],
+            "description": "A default value to use when encountering an omitted property. Shall not be defined if `required` is true."
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "semantic",
+    "geometry",
+    "properties"
+  ]
+}

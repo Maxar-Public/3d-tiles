@@ -1,0 +1,28 @@
+{
+  "name": "Ships schema",
+  "semantic": "UNKNOWN",
+  "geometry": {
+    "type": "Point",
+    "dimensions": 2
+  },
+  "properties": [{
+      "id": "Name",
+      "type": "String",
+      "required": true
+    }, {
+      "id": "Displacement",
+      "type": "Integer",
+      "unit": "tons"
+    }, {
+      "id": "Length",
+      "type": "Float",
+      "unit": "meter",
+      "min": 0
+    }, {
+      "id": "Year",
+      "type": "Integer",
+      "unit": "year",
+      "description": "The year the ship disapeared"
+    }
+  ]
+}
