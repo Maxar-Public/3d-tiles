@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "srs.schema.json",
+  "title": "Spatial reference system",
+  "$ref": "rootProperty.schema.json",
+  "description": "Spatial reference system schema",
+  "properties": {
+    "referenceSystem": {
+      "type": "string",
+      "enum": ["WGS84-G1762", "ITRF2008"],
+      "description": "The reference system"
+    },
+    "epoch": {
+      "type": "string",
+      "pattern": "^[0-9]+(\\.[0-9]+)?$",
+      "description": "Coordinate epoch is expressed as a string representing the decimal year of the epoch."
+    },
+    "coordinateSystem": {
+      "oneOf": [{
+          "type": "string",
+          "enum": ["GEOD", "ECEF"]
+        }, {
+          "type": "string",
+          "pattern": "UTM(0[123456789]|60|[12345][0123456789])[NS]"
+        }, {
+          "type": "string",
+          "pattern": "S2F[123456]"
+        }
+      ]
+    },
+    "elevation": {
+      "type": "string",
+      "enum": ["ELLIPSOID", "EGM2008"]
+    },
+    "axis": {
+      "type": "string",
+      "enum": ["NED", "ENU"],
+      "default": "NED"
+    },
+    "unitHorizontal": {
+      "type": "string",
+      "enum": ["METER", "DEGREE"],
+      "default": "METER"
+    },
+    "unitVertical": {
+      "type": "string",
+      "enum": ["METER"],
+      "default": "METER"
+    }
+  },
+  "required": ["referenceSystem", "epoch", "coordinateSystem", "elevation"]
+}

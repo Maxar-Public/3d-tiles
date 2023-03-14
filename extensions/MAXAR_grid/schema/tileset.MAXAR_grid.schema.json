@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tileset.MAXAR_grid.schema.json",
+  "title": "MAXAR_grid extension",
+  "$ref": "rootProperty.schema.json",
+  "description": "3D Tiles extension that describes the grid used for the dataset.",
+  "oneOf": [{
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["quad"],
+          "description": "Type of grid"
+        },
+        "center": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          },
+          "description": "Center of quad"
+        },
+        "size": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          },
+          "description": "Size of quad"
+        },
+        "srs": {
+          "type": "object",
+          "$ref": "srs.schema.json",
+          "description": "The spatial reference system"
+        },
+      },
+      "required": ["type", "center", "size", "srs"],
+    }, {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["s2", "geod"],
+          "description": "Type of grid"
+        },
+        "center": {
+          "not": {}
+        },
+        "size": {
+          "not": {}
+        },
+        "srs": {
+          "not": {}
+        }
+      }
+    }
+  ]
+}
