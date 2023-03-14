@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tile.MAXAR_grid.schema.json",
+  "title": "MAXAR_grid extension",
+  "$ref": "rootProperty.schema.json",
+  "description": "3D Tiles extension that describes the grid used for the dataset.",
+  "properties": {
+    "metersPerPixel": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Meters per pixel for the main texture. This value can be used to describe the resolution of the source raster from which the vectors were derived, in the case of vector data."
+    },
+    "boundingBox": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "number"
+      },
+      "description": "Size of bounding box. Defined by xmin, ymin, xmax, ymax, zmin, zmax."
+    },
+    "face": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5,
+      "description": "The face of the grid. Should be between 0-5 for S2 tiles. For geodedic tiles the face describes the hemisphere (0 = west, 1 = east)"
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The current level of the tile."
+    },
+    "index": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "description": "The [X, Y] index of the tile in the current level of the tree structure."
+    }
+  },
+  "required": [
+    "boundingBox", "level", "index"
+  ]
+}
