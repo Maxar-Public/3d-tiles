@@ -90,6 +90,11 @@
               }
             ],
             "description": "A default value to use when encountering an omitted property. Shall not be defined if `required` is true."
+          },
+          "semantic": {
+            "type": "string",
+            "minLength": 1,
+            "description": "An identifier that describes how this property should be interpreted. The semantic cannot be used by other properties in the properties schema."
           }
         }
       }
