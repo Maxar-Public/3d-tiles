@@ -7,7 +7,7 @@
 
 ## Status
 
-Draft - **Version 0.0.2**, March 17, 2023
+Draft - **Version 0.1.0**, November 19, 2024
 
 ## Dependencies
 
@@ -24,7 +24,10 @@ Written against the 3D Tiles 1.1 spec.
 
 This extension allows a tileset to use [GeoJSON](https://tools.ietf.org/html/rfc7946) directly as tile content.
 
-It also allows for specifying a external schema to help interpret the feature properties stored in the GeoJSON layer.
+It also allows for specifying a external schema to help interpret the feature properties stored in the GeoJSON layer. 
+This schema can be marked with a high-level semantic identifier that define the meaning of the properties. Recommended best practice is to select a value from a controlled vocabulary or formal classification scheme.
+
+Each field in the schema can also be marked with a semantic identifier, that describes how this property should be interpreted.
 
 ## Optional vs Required
 
