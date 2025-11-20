@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "signatureFile.schema.json",
+  "title": "Signature File",
+  "$ref": "rootProperty.schema.json",
+  "type": "object",
+  "description": "A signature file containing authentication information for files in the tileset.",
+  "properties": {
+    "signatures": {
+      "type": "array",
+      "description": "An array of signature items for authenticating files in the tileset.",
+      "items": {
+        "$ref": "signatureItem.schema.json"
+      }
+    }
+  },
+  "required": [
+    "signatures"
+  ]
+}

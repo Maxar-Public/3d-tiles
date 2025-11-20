@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tileset.MAXAR_authentication.schema.json",
+  "title": "MAXAR_authentication extension",
+  "$ref": "rootProperty.schema.json",
+  "description": "3D Tiles extension that provides authentication information for verifying the integrity and authenticity of tileset files through digital signatures.",
+  "properties": {
+    "algorithm": {
+      "description": "The signature algorithm used for authentication.",
+      "anyOf": [
+        {
+          "const": "ecdsa-p256-sha256"
+        },
+        {
+          "const": "ecdsa-p384-sha384"
+        },
+        {
+          "const": "ecdsa-p521-sha512"
+        },
+        {
+          "const": "ed25519ph"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "keyId": {
+      "type": "string",
+      "minLength": 16,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9._:/#=+@;,%\\-~]{16,256}$",
+      "description": "A unique identifier for the public key used to verify signatures. The value must uniquely identify the key within the system. The key ID should be generated to guarantee uniqueness (for example, using a UUID, a random string, a systematically generated id with namespace context, or a cryptographic hash of the key material). It must never contain the key itself or any reversible encoding of the key."
+    },
+    "signatureManifest": {
+      "type": "string",
+      "description": "The URI (or IRI) to the signature manifest containing the cryptographic signatures for selected files linked from this tileset. May include transitive dependencies. Must exclude external tilesets. Data URIs are not allowed.",
+      "format": "iri-reference",
+      "pattern": "^(?!data:).*"
+    },
+    "signature": {
+      "type": "string",
+      "description": "The URI (or IRI) to the file containing the cryptographic signature of the signature manifest. The file contains raw binary signature bytes generated using the algorithm specified in the `algorithm` property, and can be validated with standard tools such as OpenSSL. Data URIs are not allowed.",
+      "format": "iri-reference",
+      "pattern": "^(?!data:).*"
+    }
+  },
+  "required": [
+    "algorithm",
+    "keyId",
+    "signatureManifest",
+    "signature"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "signatureItem.schema.json",
+  "title": "Signature Item",
+  "$ref": "rootProperty.schema.json",
+  "type": "object",
+  "description": "A signature object containing authentication information for a specific file.",
+  "properties": {
+    "uri": {
+      "type": "string",
+      "description": "The URI (or IRI) of the file that this signature authenticates.",
+      "format": "iri-reference"
+    },
+    "signature": {
+      "type": "string",
+      "contentEncoding": "base64",
+      "description": "The cryptographic signature for the entire file. Standard Base64 (RFC 4648 §4); padding is mandatory when needed."
+    },
+    "partialSignature": {
+      "type": "object",
+      "description": "Optional signature information for a specific range within the file.",
+      "properties": {
+        "byteLength": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The number of bytes from the byteOffset that are covered by this signature."
+        },
+        "byteOffset": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "The byte offset from the beginning of the file where the signed range starts."
+        },
+        "signature": {
+          "type": "string",
+          "contentEncoding": "base64",
+          "description": "The cryptographic signature for the specified range. Standard Base64 (RFC 4648 §4); padding is mandatory when needed."
+        }
+      },
+      "required": [
+        "byteLength",
+        "signature"
+      ]
+    }
+  },
+  "required": [
+    "uri",
+    "signature"
+  ]
+}
+
