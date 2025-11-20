@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tileset.MAXAR_encryption_keys.schema.json",
+  "title": "MAXAR_encryption_keys extension",
+  "$ref": "rootProperty.schema.json",
+  "description": "3D Tiles extension that provides a reference to an external keyfile containing encryption keys used to decrypt tile content. Works in conjunction with the MAXAR_buffer_encryption glTF extension to enable secure delivery of 3D Tiles content.",
+  "type": "object",
+  "properties": {
+    "keyfile": {
+      "type": "string",
+      "format": "iri-reference",
+      "pattern": "^(?!data:).*",
+      "description": "URI (or IRI) of external key file. DataURIs are not allowed."
+    }
+  },
+  "required": ["keyfile"]
+}
