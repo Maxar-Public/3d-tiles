@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tileset.MAXAR_content_3tz.schema.json",
+  "title": "MAXAR_content_3tz extension",
+  "$ref": "rootProperty.schema.json",
+  "description": "3D Tiles extension that enables using a 3tz archive as tile content and requires 3tz Path Resolver handling for all URI resolution when present.",
+  "type": "object",
+  "properties": {}
+}
+
