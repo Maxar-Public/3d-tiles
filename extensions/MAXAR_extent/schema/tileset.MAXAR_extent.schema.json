@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tileset.MAXAR_extent.schema.json",
+  "title": "MAXAR_extent extension",
+  "description": "Enables annotation of 2D regions (extents) in a tileset via reference to a GeoJSON file containing Polygon or MultiPolygon geometries.",
+  "$ref": "rootProperty.schema.json",
+  "type": "object",
+
+  "properties": {
+    "uri": {
+      "type": "string",
+      "description": "The URI (or IRI) of the external GeoJSON file containing the extent definition. The GeoJSON must contain only Polygon or MultiPolygon geometries that are confined within the bounding volume of the dataset root tile.",
+      "format": "iri-reference"
+    }
+  },
+  "required": [
+    "uri"
+  ]
+}
