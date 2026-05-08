@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "srs.MAXAR_grid.schema.json",
+  "title": "Spatial reference system",
+  "$ref": "rootProperty.schema.json",
+  "description": "Spatial reference system schema",
+  "properties": {
+    "referenceSystem": {
+      "type": "string",
+      "enum": ["WGS84-G1762", "ITRF2008"],
+      "description": "The geodetic reference frame used for coordinate definitions"
+    },
+    "epoch": {
+      "type": "string",
+      "pattern": "^[12][0-9]{3}(\\.[0-9]{1,2})?$",
+      "description": "Coordinate epoch expressed as a decimal year (e.g., '2005.0', '2023.5'). Must be between 1000-2999."
+    },
+    "coordinateSystem": {
+      "type": "string",
+      "description": "The coordinate system used for the spatial reference",
+      "oneOf": [
+        { "enum": ["GEOD", "ECEF"] },
+        { "pattern": "^UTM(0[1-9]|[1-5][0-9]|60)[NS]$" },
+        { "pattern": "^S2F[0-5]$" }
+      ]
+    },
+    "elevation": {
+      "type": "string",
+      "enum": ["ELLIPSOID", "EGM2008"],
+      "description": "Vertical datum reference: ELLIPSOID for ellipsoidal heights, EGM2008 for geoid heights"
+    },
+    "axis": {
+      "type": "string",
+      "enum": ["NED", "ENU"],
+      "default": "NED",
+      "description": "Axis orientation: NED (North-East-Down) or ENU (East-North-Up)"
+    },
+    "unitHorizontal": {
+      "type": "string",
+      "enum": ["METER", "DEGREE"],
+      "default": "METER",
+      "description": "Unit of measurement for horizontal coordinates"
+    },
+    "unitVertical": {
+      "type": "string",
+      "enum": ["METER"],
+      "default": "METER",
+      "description": "Unit of measurement for vertical coordinates"
+    }
+  },
+  "required": ["coordinateSystem", "elevation"],
+  "if": {
+    "properties": {
+      "coordinateSystem": {
+        "anyOf": [
+          { "const": "GEOD" },
+          { "pattern": "^S2F[0-5]$" }
+        ]
+      }
+    }
+  },
+  "then": {
+    "properties": {
+      "referenceSystem": { "const": "ITRF2008" },
+      "epoch": { "const": "2005.0" }
+    }
+  },
+  "else": {
+    "required": ["referenceSystem", "epoch"]
+  }
+}
